@@ -129,7 +129,7 @@ const LanguageDetector: React.FC = () => {
         });
       }, 100);
 
-      const response = await axios.post('http://localhost:3001/api/detect-language', formData, {
+      const response = await axios.post('http://localhost:3006/api/detect-language', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -166,7 +166,7 @@ const LanguageDetector: React.FC = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:3001/api/detect-language', {
+      const response = await axios.post('http://localhost:3006/api/detect-language', {
         text: text,
         method: method
       });
@@ -229,6 +229,18 @@ const LanguageDetector: React.FC = () => {
             </svg>
             Choose Detection Method
           </h2>
+          
+          {/* Accuracy Info Banner */}
+          <div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4">
+            <div className="flex items-center text-blue-700">
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="font-medium">💡 Accuracy Tip:</span>
+              <span className="ml-2 text-sm">More text = Better accuracy! Aim for 25+ words for optimal results.</span>
+            </div>
+          </div>
+          
           <div className="grid md:grid-cols-2 gap-6">
             <label className={`method-card flex items-center p-6 border-2 rounded-xl cursor-pointer transition-all ${
               method === 'ngram' ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-blue-100 shadow-lg' : 'border-gray-200 hover:border-blue-300 bg-white'
@@ -342,7 +354,7 @@ const LanguageDetector: React.FC = () => {
                   <textarea
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    placeholder="Type or paste your text here... (minimum 10 words required for accurate detection)"
+                    placeholder="Type or paste your text here... (10+ words for basic accuracy, 25+ words for better accuracy, 50+ words for optimal results)"
                     className={`w-full h-40 p-4 border-2 rounded-xl resize-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-gray-700 placeholder-gray-400 ${
                       text.length > 0 && !isTextValid ? 'border-red-300 bg-red-50' : 'border-gray-300'
                     }`}
@@ -625,7 +637,7 @@ const LanguageDetector: React.FC = () => {
                 </div>
                 <div>
                   <p className="font-medium text-gray-800">Minimum Text</p>
-                  <p className="text-sm text-gray-600">10 words required for accurate detection and reliable results</p>
+                  <p className="text-sm text-gray-600">10 words required for basic accuracy, 25+ words for better accuracy, 50+ words for optimal results</p>
                 </div>
               </div>
             </div>

@@ -4,105 +4,62 @@ interface Language {
   name: string;
   code: string;
   flag: string;
-  description: string;
+  description?: string;
   sample: string;
-  family: string;
+  family?: string;
 }
 
 const InfoPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'approach' | 'languages' | 'references'>('approach');
+  const [activeTab, setActiveTab] = useState<'approach' | 'languages'>('approach');
 
   const languages: Language[] = [
     {
       name: 'English',
       code: 'en',
       flag: '🇺🇸',
-      description: 'West Germanic language with global influence',
       sample: 'The quick brown fox jumps over the lazy dog.',
-      family: 'Germanic'
     },
     {
       name: 'Arabic',
       code: 'ar',
       flag: '🇸🇦',
-      description: 'Semitic language with rich literary tradition',
       sample: 'اللغة العربية هي لغة سامية قديمة',
-      family: 'Semitic'
     },
     {
       name: 'German',
       code: 'de',
       flag: '🇩🇪',
-      description: 'West Germanic language with complex grammar',
       sample: 'Der schnelle braune Fuchs springt über den faulen Hund.',
-      family: 'Germanic'
     },
     {
       name: 'Spanish',
       code: 'es',
       flag: '🇪🇸',
-      description: 'Romance language with global reach',
       sample: 'El zorro marrón rápido salta sobre el perro perezoso.',
-      family: 'Romance'
     },
     {
       name: 'French',
       code: 'fr',
       flag: '🇫🇷',
-      description: 'Romance language of diplomacy and culture',
       sample: 'Le renard brun rapide saute par-dessus le chien paresseux.',
-      family: 'Romance'
     },
     {
       name: 'Italian',
       code: 'it',
       flag: '🇮🇹',
-      description: 'Romance language of art and music',
       sample: 'La volpe marrone veloce salta sopra il cane pigro.',
-      family: 'Romance'
     },
     {
       name: 'Portuguese',
       code: 'pt',
       flag: '🇵🇹',
-      description: 'Romance language with global presence',
       sample: 'A raposa marrom rápida pula sobre o cão preguiçoso.',
-      family: 'Romance'
     },
     {
       name: 'Russian',
       code: 'ru',
       flag: '🇷🇺',
-      description: 'Slavic language with Cyrillic script',
       sample: 'Быстрая коричневая лиса перепрыгивает через ленивую собаку.',
-      family: 'Slavic'
-    }
-  ];
-
-  const references = [
-    {
-      title: "Language Detection Using Character N-gram Frequency Analysis",
-      authors: "Cavnar, W. B., & Trenkle, J. M.",
-      year: "1994",
-      journal: "Proceedings of SDAIR-94, 1st Annual Symposium on Document Analysis and Information Retrieval",
-      doi: "10.1.1.53.9367",
-      description: "Foundational paper on using character n-grams for language identification"
-    },
-    {
-      title: "TF-IDF: A Single-Page Tutorial",
-      authors: "Ramos, J.",
-      year: "2003",
-      journal: "Information Retrieval",
-      doi: "10.1.1.121.1424",
-      description: "Comprehensive explanation of TF-IDF weighting scheme for text analysis"
-    },
-    {
-      title: "Naive Bayes and Text Classification",
-      authors: "McCallum, A., & Nigam, K.",
-      year: "1998",
-      journal: "Proceedings of AAAI-98 Workshop on Learning for Text Categorization",
-      doi: "10.1.1.46.1529",
-      description: "Detailed study of Naive Bayes classifier for text categorization tasks"
     }
   ];
 
@@ -151,8 +108,8 @@ const InfoPage: React.FC = () => {
             Project Information
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Comprehensive overview of our language detection system, including methodologies, 
-            supported languages, and academic references.
+            Comprehensive overview of our language detection system, including methodologies and 
+            supported languages.
           </p>
         </div>
 
@@ -189,21 +146,6 @@ const InfoPage: React.FC = () => {
                 Languages
               </span>
             </button>
-            <button
-              onClick={() => setActiveTab('references')}
-              className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all ${
-                activeTab === 'references'
-                  ? 'bg-white text-blue-600 shadow-lg'
-                  : 'text-gray-600 hover:text-gray-800'
-              }`}
-            >
-              <span className="flex items-center justify-center">
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-                References
-              </span>
-            </button>
           </div>
         </div>
 
@@ -217,10 +159,7 @@ const InfoPage: React.FC = () => {
                 </svg>
                 Methodology Overview
               </h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                Our language detection system implements two complementary approaches, each optimized for different use cases 
-                and text characteristics. The system combines the speed of statistical methods with the accuracy of machine learning.
-              </p>
+            
               
               <div className="grid md:grid-cols-2 gap-8">
                 {approaches.map((approach, index) => (
@@ -272,18 +211,22 @@ const InfoPage: React.FC = () => {
 
             <div className="glass rounded-2xl p-8 shadow-xl">
               <h3 className="text-2xl font-bold text-gray-800 mb-4">Technical Implementation</h3>
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200">
-                  <h4 className="font-semibold text-blue-800 mb-2">Backend</h4>
-                  <p className="text-blue-700 text-sm">FastAPI with Python, scikit-learn for ML, optimized for performance</p>
+                  <h4 className="font-semibold text-blue-800 mb-2">FastAPI Backend</h4>
+                  <p className="text-blue-700 text-sm">Python-based backend using scikit-learn for Machine Learning approach (TF-IDF + Naive Bayes), optimized for ML inference and model serving</p>
+                </div>
+                <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl border border-green-200">
+                  <h4 className="font-semibold text-green-800 mb-2">Node.js Backend</h4>
+                  <p className="text-green-700 text-sm">JavaScript backend implementing N-gram analysis for character-based language detection, handling file processing and text preprocessing. Also, it is used for as middleware to communicate with the python backend.</p>
                 </div>
                 <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border border-purple-200">
                   <h4 className="font-semibold text-purple-800 mb-2">Frontend</h4>
-                  <p className="text-purple-700 text-sm">React with TypeScript, modern UI/UX with responsive design</p>
+                  <p className="text-purple-700 text-sm">React with TypeScript, modern UI/UX with responsive design, Tailwind CSS for styling</p>
                 </div>
-                <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl border border-green-200">
-                  <h4 className="font-semibold text-green-800 mb-2">Accuracy</h4>
-                  <p className="text-green-700 text-sm">95%+ accuracy on test datasets with 8 supported languages</p>
+                <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl border border-orange-200">
+                  <h4 className="font-semibold text-orange-800 mb-2">Architecture</h4>
+                  <p className="text-orange-700 text-sm">Microservices architecture with FastAPI (port 8000), Node.js (port 3006), and React frontend (port 3005)</p>
                 </div>
               </div>
             </div>
@@ -316,9 +259,7 @@ const InfoPage: React.FC = () => {
                     <div className="space-y-3">
                       <div>
                         <p className="text-sm text-gray-600 mb-2">{language.description}</p>
-                        <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs">
-                          {language.family}
-                        </span>
+                      
                       </div>
                       
                       <div className="bg-gray-50 rounded-lg p-3">
@@ -331,90 +272,9 @@ const InfoPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="glass rounded-2xl p-8 shadow-xl">
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Language Families Distribution</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-                    <span className="font-medium">Romance Languages</span>
-                    <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">4</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-                    <span className="font-medium">Germanic Languages</span>
-                    <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">2</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-                    <span className="font-medium">Semitic Languages</span>
-                    <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">1</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-                    <span className="font-medium">Slavic Languages</span>
-                    <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm">1</span>
-                  </div>
-                </div>
-                <div className="bg-white rounded-lg p-6">
-                  <h4 className="font-semibold text-gray-800 mb-3">Future Expansion</h4>
-                  <p className="text-gray-600 text-sm mb-4">
-                    We plan to expand our language support to include more languages from different families:
-                  </p>
-                  <ul className="space-y-2 text-sm text-gray-600">
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                      Asian languages (Chinese, Japanese, Korean)
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                      African languages (Swahili, Hausa)
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
-                      Nordic languages (Swedish, Norwegian)
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
           </div>
         )}
 
-        {activeTab === 'references' && (
-          <div className="animate-slide-in">
-            <div className="glass rounded-2xl p-8 shadow-xl">
-              <h2 className="text-3xl font-bold text-gray-800 mb-6 flex items-center">
-                <svg className="w-8 h-8 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-                Academic References
-              </h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                Our implementation is based on established research in natural language processing and language identification. 
-                Below are the key papers and resources that informed our approach.
-              </p>
-              
-              <div className="space-y-6">
-                {references.map((ref, index) => (
-                  <div key={index} className="bg-white rounded-xl p-6 border border-gray-200 reference-card">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-bold text-gray-800 mb-2">{ref.title}</h3>
-                        <p className="text-gray-600 mb-2">
-                          <span className="font-medium">{ref.authors}</span> • {ref.year}
-                        </p>
-                        <p className="text-gray-500 text-sm mb-3">{ref.journal}</p>
-                        <p className="text-gray-700">{ref.description}</p>
-                      </div>
-                      <div className="ml-4 text-right">
-                        <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
-                          DOI: {ref.doi}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

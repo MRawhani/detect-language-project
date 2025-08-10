@@ -16,7 +16,7 @@ start "React Frontend" cmd /k "cd frontend && npm install && npm start"
 echo.
 echo All services are starting...
 echo FastAPI: http://localhost:8000
-echo Node.js: http://localhost:3001
+echo Node.js: http://localhost:3006
 echo React: http://localhost:3000
 echo.
 pause 
