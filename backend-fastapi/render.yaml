@@ -3,7 +3,10 @@ services:
     name: language-detection-fastapi
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
+    pythonVersion: "3.11.7"
+    buildCommand: |
+      pip install --upgrade pip setuptools wheel
+      pip install -r requirements.txt
     startCommand: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PORT
