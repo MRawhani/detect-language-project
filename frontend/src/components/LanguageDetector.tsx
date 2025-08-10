@@ -129,7 +129,7 @@ const LanguageDetector: React.FC = () => {
         });
       }, 100);
 
-      const response = await axios.post('http://localhost:3006/api/detect-language', formData, {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL || 'http://localhost:3006'}/api/detect-language`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -166,7 +166,7 @@ const LanguageDetector: React.FC = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:3006/api/detect-language', {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/detect-language`, {
         text: text,
         method: method
       });
